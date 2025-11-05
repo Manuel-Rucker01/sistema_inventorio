@@ -1,8 +1,19 @@
 import sqlite3
 import os
-from langchain.agents import AgentExecutor, create_tool_calling_agent
-from langchain_core.prompts import ChatPromptTemplate
+# CÓDIGO CORREGIDO Y ROBUSTO PARA LANGCHAIN V0.2.X+
+
+# Importaciones consolidadas para el Agente:
+from langchain.agents import create_tool_calling_agent
+from langchain.agents import AgentExecutor
+
+# Importaciones de LangChain Community (para Ollama y Vector Stores):
 from langchain_community.llms import Ollama
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import FakeEmbeddings 
+from langchain_community.llms import FakeListLLM # Para el fallback de simulación
+
+# Importaciones del Core:
+from langchain_core.prompts import ChatPromptTemplate
 from database.db_tools import consultar_stock, actualizar_stock, buscar_similitud, crear_producto
 from rag_knowledge.rag_core import consulta_documentos, init_rag_system
 

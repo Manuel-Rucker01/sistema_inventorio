@@ -36,7 +36,7 @@ def init_db():
         ('Peras', 25, 'Abajo', 15),
         ('Bananas', 10, 'Medio', 25)
     ]
-    cursor.executemany("INSERT OR IGNORE INTO productos (nombre, stock_actual, ubicacion, costo_unitario) VALUES (?, ?, ?)", productos_iniciales)
+    cursor.executemany("INSERT OR IGNORE INTO productos (nombre, stock_actual, ubicacion, costo_unitario) VALUES (?, ?, ?, ?)", productos_iniciales)
     conn.commit()
     conn.close()
     print(f"Base de datos relacional '{DB_NAME}' inicializada con éxito.")
