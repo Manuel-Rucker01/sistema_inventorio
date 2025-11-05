@@ -3,17 +3,13 @@ import os
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.llms import Ollama
-from database.db_tools import consultar_stock, actualizar_stock
+from database.db_tools import consultar_stock, actualizar_stock, buscar_similitud, crear_producto
 from rag_knowledge.rag_core import consulta_documentos, init_rag_system
-
-# NOTA: La línea 'from database.db_tools import...' funcionará una vez que 
-# la rama 'feature/db-tools-v1' haya sido fusionada a 'develop' y esté disponible.
 
 # --- 1. CONFIGURACIÓN DEL SISTEMA ---
 
 # 1.1 Conexión con Llama 3 (Ollama)
 try:
-    # Asegúrate de que Ollama esté corriendo y Llama 3 esté descargado
     llm = Ollama(model="llama3", base_url="http://localhost:11434")
 except Exception as e:
     print(f"Error al conectar con Ollama. Se usará un LLM de simulación: {e}")
@@ -34,7 +30,7 @@ Reglas de Oro:
 
 # 1.3 Listado de Todas las Herramientas
 # El LLM ve esta lista y decide cuál usar.
-tools = [consultar_stock, actualizar_stock, consulta_documentos]
+tools = [consultar_stock, actualizar_stock, consulta_documentos, buscar_similitud, crear_producto]
 
 # 1.4 Creación del Prompt Final para el Agente
 prompt = ChatPromptTemplate.from_messages(
