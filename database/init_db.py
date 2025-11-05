@@ -13,7 +13,8 @@ def init_db():
             id_producto INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL UNIQUE,
             stock_actual INTEGER NOT NULL DEFAULT 0,
-            ubicacion TEXT
+            ubicacion TEXT,
+            costo_unitario REAL NOT NULL DEFAULT 0.0 
         )
     """)
     
@@ -31,9 +32,9 @@ def init_db():
 
     # 3. Insertar datos iniciales
     productos_iniciales = [
-        ('Tornillo M4 x 10mm', 150, 'A1-03'),
-        ('Martillo Bicolor 500g', 25, 'B2-01'),
-        ('Taladro Perforador XL', 10, 'C1-05')
+        ('Manzanas', 150, 'Arriba', 20),
+        ('Peras', 25, 'Abajo', 15),
+        ('Bananas', 10, 'Medio', 25)
     ]
     cursor.executemany("INSERT OR IGNORE INTO productos (nombre, stock_actual, ubicacion) VALUES (?, ?, ?)", productos_iniciales)
     conn.commit()
