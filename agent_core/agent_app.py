@@ -82,7 +82,7 @@ async def run_chatbot():
             break
         
         try:
-            response = await agent.against(user_input)
+            response = await agent.run(user_input)
             print(f"Agente: {response.response}\n")
         except Exception as e:
             print(f"Error al procesar la solicitud: {e}\n")
