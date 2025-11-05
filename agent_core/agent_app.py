@@ -75,15 +75,18 @@ async def run_chatbot():
     print("CHATBOT DE INVENTARIO HÍBRIDO CON LLAMA 3 (OLLAMA)")
     print("="*50 + "\n")
 
-    # PRUEBA 1: Función Calling (Actualización de stock)
-    print(">>> PRUEBA 1: Actualizar stock de Tornillo M4 (ACCIÓN)")
-    response_update = await agent.run("Recibimos 80 Tornillos M4 x 10mm, añádelos.")
-    print(f"\nRespuesta del Chatbot:\n{response_update}\n")
-
-    # PRUEBA 2: Consulta RAG (Conocimiento)
-    print(">>> PRUEBA 2: Consulta sobre una política (CONOCIMIENTO)")
-    response_rag = await agent.run("¿Cuál es el procedimiento que debemos seguir al recibir un envío con daños?")
-    print(f"\nRespuesta del Chatbot:\n{response_rag}\n")
+    while True:
+        user_input = input("Tú: ")
+        if user_input.lower() in ['salir', 'exit', 'quit']:
+            print("Saliendo del chatbot. ¡Hasta luego!")
+            break
+        
+        try:
+            response = await agent.against(user_input)
+            print(f"Agente: {response.response}\n")
+        except Exception as e:
+            print(f"Error al procesar la solicitud: {e}\n")
+    
 
 if __name__ == "__main__":
     asyncio.run(run_chatbot())

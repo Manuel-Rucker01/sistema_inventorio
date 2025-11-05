@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_NAME = "./database/inventario.db"
+DB_NAME = "inventario.db"
 
 def init_db():
     """Crea la base de datos relacional y las tablas de productos/movimientos."""
@@ -30,16 +30,13 @@ def init_db():
         )
     """)
 
-    # 3. Insertar datos iniciales
-    productos_iniciales = [
-        ('Manzanas', 150, 'Arriba', 20),
-        ('Peras', 25, 'Abajo', 15),
-        ('Bananas', 10, 'Medio', 25)
-    ]
-    cursor.executemany("INSERT OR IGNORE INTO productos (nombre, stock_actual, ubicacion, costo_unitario) VALUES (?, ?, ?, ?)", productos_iniciales)
+    # ----------------------------------------------------
+    # LÍNEAS ELIMINADAS: 
+    # Ya no se insertan productos iniciales (Manzanas, Peras, Bananas)
+    # ----------------------------------------------------
+    
     conn.commit()
     conn.close()
-    print(f"Base de datos relacional '{DB_NAME}' inicializada con éxito.")
+    print(f"Base de datos relacional '{DB_NAME}' inicializada con éxito (VACÍA).")
 
-if __name__ == "__main__":
-    init_db()
+# No hay bloque __main__, la función debe ser llamada desde agent_app.py
