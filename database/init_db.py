@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_NAME = "inventario.db"
+DB_NAME = "./database/inventario.db"
 
 def init_db():
     """Crea la base de datos relacional y las tablas de productos/movimientos."""

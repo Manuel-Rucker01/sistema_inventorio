@@ -1,12 +1,10 @@
 import sqlite3
-from langchain_core.tools import tool
 from difflib import get_close_matches # Para buscar similitud
 
 DB_NAME = "inventario.db" # Asegúrate de que coincida con init_db.py
 
 # --- Herramientas de CONSULTA (Consulta Stock y Similitud) ---
 
-@tool
 def buscar_similitud(nombre_producto: str) -> str:
     """Usa esta herramienta cuando un producto no se encuentra. Devuelve una lista de nombres de productos similares."""
     conn = sqlite3.connect(DB_NAME)
@@ -24,7 +22,6 @@ def buscar_similitud(nombre_producto: str) -> str:
         return f"SUGERENCIAS_ENCONTRADAS: '{sugerencias_str}'. Pregúntale al usuario si se refiere a alguno de estos productos."
     return "SUGERENCIAS_NO_ENCONTRADAS: No se encontraron productos similares. La única opción es crear uno nuevo."
 
-@tool
 def consultar_stock(nombre_producto: str) -> str:
     """Usa esta herramienta para obtener el stock, ubicación y COSTO UNITARIO de un producto."""
     conn = sqlite3.connect(DB_NAME)
@@ -44,7 +41,6 @@ def consultar_stock(nombre_producto: str) -> str:
 
 # --- Herramientas de CREACIÓN y ACTUALIZACIÓN ---
 
-@tool
 def crear_producto(nombre_producto: str, stock_inicial: int = 0, costo_unitario: float = 0.0, ubicacion: str = "PENDIENTE") -> str:
     """
     Usa esta herramienta para añadir un producto COMPLETAMENTE NUEVO al inventario. 
@@ -71,8 +67,6 @@ def crear_producto(nombre_producto: str, stock_inicial: int = 0, costo_unitario:
     finally:
         conn.close()
 
-
-@tool
 def actualizar_stock(nombre_producto: str, delta_cantidad: int) -> str:
     """
     Usa esta herramienta para AÑADIR o RESTAR stock de un producto EXISTENTE.
