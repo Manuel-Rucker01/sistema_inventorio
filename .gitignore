@@ -1,0 +1,17 @@
+# Ignorar archivos y carpetas de Python generados automáticamente
+
+# 1. Ignorar la carpeta de cache de Python
+__pycache__/
+
+# 2. Ignorar el archivo de byte-code compilado
+*.pyc
+
+# 3. Ignorar el entorno virtual
+/environment/
+
+# 4. Ignorar el archivo de la base de datos local
+*.db
+
+# 5. Ignorar archivos específicos de sistema/logs
+.DS_Store
+*.log
